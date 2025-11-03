@@ -124,28 +124,6 @@ Ce qui sera testé :
 
 Le système ne doit jamais crasher. Toute erreur doit être gérée proprement avec un message approprié et un code d'erreur HTTP correct pour le Client.
 
-##  Qualité et Documentation du Code
 
-###  Couverture de code
-
-**Approche** :
-
-- Mesurer la couverture régulièrement
-- Identifier les branches non testées
-- Ne pas ajouter de tests inutiles juste pour atteindre 100%
-
-**Attention** : 100% de couverture ne garantit pas la qualité. Des tests bidon peuvent couvrir du code sans rien valider.
-
-### Qualité du code 
-
-**Vérifications** :
-
-- Respect des conventions Python
-- Documentation de toutes les fonctions et classes
-- Nommage cohérent et explicite
-- Pas de code mort ou inutilisé
-- Complexité raisonnable
-
-L'outil `ruff` sera utilisé pour vérifier automatiquement ces critères.
 
 
