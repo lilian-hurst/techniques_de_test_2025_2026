@@ -3,7 +3,7 @@
 
 Ce document décrit la mise en place d'un plan de tests, il décrira les différents tests mit en place et pourquoi/comment ça sera fait. 
 
-### Organisation des tests 
+## Organisation des tests 
 
 #### Tests de comportement  
 - La triangulation donne de bons résultats 
@@ -17,7 +17,7 @@ L'ensemble du code doit être couvert par des tests, on pourra le vérifier avec
 - Retourne des métriques
 - Permet d'identifié les goulots d'étranglement (dans le cas d'opérations gourmandes)
 
-### Tests principaux
+## Tests principaux
 
 #### Validation du format binaire
 
@@ -28,7 +28,6 @@ Ce qui sera testé :
 - La gestion des cas limites (données vide, très grandes, très petites)
 
 **Approche** : on vérifie que les données transformés respectent le format byte par byte. Des tests seront effectués avec des valeurs connus afin de vérifie la conformité de la conversion. Des tests de "roundtrip" seront effectués pour valider le bon fonctionnement dans les deux sens.
-`
 #### Validation de l'algorithme de triangulation 
 
 Ce qui sera testé : 
@@ -79,10 +78,7 @@ Ce qui sera testé :
 - La structure et le contenu des réponses binaires
 - Les messages d'erreur éventuels
 
-### Tests de performances
-
-#### Obectifs
-Identifier les limites du système et s'assurer que les performances sont acceptables pour différentes tailles de données.
+## Tests de performances
 
 **Sérialisation/Désérialisation :**
 
