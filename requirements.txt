@@ -1,3 +1,5 @@
+pytest
+triangulator
 blinker==1.9.0
 click==8.3.0
 flask==3.1.2
