@@ -2,11 +2,9 @@
 
 from __future__ import annotations
 
-import itertools
-
 import pytest
 
-from src.triangulator import algorithm, exceptions
+from src.triangulator import algorithm, exceptions, serialization
 
 
 def _normalize(triangles):
@@ -26,7 +24,10 @@ def test_triangulate_triangle_returns_single_face(triangle_points) -> None:
 
 @pytest.mark.algorithm
 def test_triangulate_square_returns_two_faces(square_points) -> None:
-    """The triangulation of a convex quadrilateral should yield two faces."""
+    """
+        SCÉNARIO : Triangulation d'un carré.
+        POURQUOI : Cas de base. Un carré (4 points) doit donner 2 triangles (n-2).
+        """
 
     result = algorithm.triangulate(square_points)
 
@@ -115,7 +116,12 @@ def test_triangulation_uses_all_points(pentagon_points) -> None:
 
 @pytest.mark.algorithm
 def test_triangulation_area_property(triangle_points) -> None:
-    """Sum of triangle areas should equal polygon area (for convex shapes)."""
+    """
+    SCÉNARIO : Propriété mathématique (Invariant).
+    POURQUOI : Test "oracle". La somme des aires des petits triangles doit être
+             égale à l'aire du polygone total.
+    NOTE : C'est une méthode très puissante pour vérifier la cohérence géométrique.
+    """
 
     triangles = algorithm.triangulate(triangle_points)
 
@@ -131,4 +137,23 @@ def test_triangulation_area_property(triangle_points) -> None:
     # For a single triangle, area should match
     expected_area = triangle_area(triangle_points, (0, 1, 2))
     assert total_area == pytest.approx(expected_area)
+
+
+@pytest.mark.algorithm
+def test_triangulate_accepts_raw_bytes(triangle_points) -> None:
+    """
+    SCÉNARIO : L'algorithme reçoit des bytes au lieu d'une liste.
+    POURQUOI : Vérifier que la fonction est polymorphe (accepte les deux types).
+    Cela permet à l'app d'optimiser en évitant une conversion intermédiaire si besoin.
+    """
+    # 1. Create bytes payload
+    payload = serialization.point_set_to_bytes(triangle_points)
+
+    # 2. Call algorithm directly with bytes instead of list
+    result = algorithm.triangulate(payload)
+
+    # 3. Verify it worked
+    assert len(result) == 1
+    assert result[0] == (0, 1, 2)
+
 

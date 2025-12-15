@@ -1,7 +1,9 @@
-.PHONY: test unit_test perf_test coverage lint doc
+.PHONY: test run unit_test perf_test coverage lint doc
 
 test:
 	pytest tests/
+
+
 
 unit_test:
 	pytest tests/ -m "not performance"
@@ -16,6 +18,7 @@ coverage:
 
 lint:
 	ruff check src/ tests/
+	ruff check --fix src/ tests/
 
 doc:
 	pdoc --html src/triangulator --output-dir docs

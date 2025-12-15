@@ -6,13 +6,17 @@ import time
 
 import pytest
 
-from src.triangulator import serialization, algorithm
+from src.triangulator import algorithm, serialization
 
 
 @pytest.mark.performance
 @pytest.mark.parametrize("size", [10, 100, 1_000, 10_000])
 def test_point_set_serialization_scaling(dense_point_set_factory, size) -> None:
-    """Measure how long serialization takes as the dataset grows."""
+    """
+    SCÉNARIO : Mesure du temps de sérialisation pour N points.
+    POURQUOI : Vérifier la complexité algorithmique (doit être linéaire O(N)).
+    COMMENT : On vérifie que la taille en octets est exacte et que le temps est < seuil.
+    """
 
     points = dense_point_set_factory(size)
     start = time.perf_counter()
@@ -28,7 +32,11 @@ def test_point_set_serialization_scaling(dense_point_set_factory, size) -> None:
 @pytest.mark.performance
 @pytest.mark.parametrize("size", [10, 30, 60])
 def test_triangulation_scaling(dense_point_set_factory, size) -> None:
-    """Measure triangulation responsiveness on increasingly large inputs."""
+    """
+    SCÉNARIO : Mesure du temps de l'algorithme de triangulation.
+    POURQUOI : S'assurer que le cœur du calcul reste performant.
+    NOTE : Le test échouera si l'algo devient exponentiel par erreur.
+    """
 
     points = dense_point_set_factory(size)
     start = time.perf_counter()

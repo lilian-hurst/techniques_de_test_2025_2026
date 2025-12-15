@@ -4,19 +4,19 @@ from __future__ import annotations
 
 import math
 import sys
+from collections.abc import Callable, Sequence
 from pathlib import Path
-from typing import Callable, Iterable, List, Sequence, Tuple
 
 import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
-SRC = ROOT / "src"
 
-if str(SRC) not in sys.path:
-    sys.path.insert(0, str(SRC))
 
-Point = Tuple[float, float]
-Triangle = Tuple[int, int, int]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+Point = tuple[float, float]
+Triangle = tuple[int, int, int]
 
 
 @pytest.fixture(scope="session")
